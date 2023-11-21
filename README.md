@@ -1,6 +1,6 @@
 # BrainTumorSegmentation-
 WEB APP for Brain Tumor Segmentation into gliomas, pituitary, meningioma, and tumor free using CNN
-1.Abstract
+# 1.Abstract
 The diagnosis of brain tumors traditionally involves invasive procedures like biopsy, often performed during definitive brain surgery. Advances in technology and machine learning offer a non-invasive alternative to aid radiologists in tumor diagnostics. Among machine learning algorithms, Convolutional Neural Networks (CNNs) have demonstrated significant success in image segmentation and classification. In this study, we introduce a novel CNN architecture designed for the classification of three types of brain tumors using T1-weighted contrast-enhanced magnetic resonance images.
 Distinguishing itself from existing pre-trained networks, our developed CNN architecture prioritizes simplicity while maintaining efficacy. The network's performance was systematically assessed through four approaches, involving combinations of two 10-fold cross-validation methods and two databases. To gauge the network's generalization capability, subject-wise cross-validation was employed, and augmentation of the image database was explored to test for improvements.
 The most notable outcome was achieved with record-wise cross-validation for the augmented dataset using the 10-fold method, yielding an impressive accuracy of 96.7%. The developed CNN architecture showcased not only high accuracy but also exhibited good generalization capability. Furthermore, its efficient execution speed positions it as a potentially effective decision-support tool for radiologists in medical diagnostics.
@@ -8,7 +8,7 @@ This research highlights the promise of leveraging machine learning, particularl
 
 
 
-2. Introduction
+# 2. Introduction
 Cancer stands as the second leading cause of global mortality, emphasizing the critical need for early detection to prevent fatalities. Tumors, whether benign, pre-carcinoma, or malignant, necessitate distinct diagnostic approaches. Unlike malignant tumors, benign tumors are typically non-spreading and surgically removable. Within the realm of primary brain tumors, gliomas, meningiomas, and pituitary tumors hold significance. Gliomas originate from brain tissues other than nerve cells and blood vessels, while meningiomas arise from membranes covering the brain, and pituitary tumors manifest as lumps within the skull. Accurate differentiation among these tumor types is pivotal for effective clinical diagnostics.
 
 Magnetic Resonance Imaging (MRI) serves as the primary method for tumor type differential diagnostics. However, its susceptibility to subjectivity and the challenge of processing vast datasets hinder human observation. Early brain tumor detection heavily relies on radiologist experience, and a comprehensive diagnosis often involves invasive procedures like biopsies performed during brain surgery. To address these challenges and enhance diagnostics, there is a crucial need for an effective tool utilizing artificial intelligence and machine learning for tumor segmentation and classification from MRI images.
@@ -20,25 +20,25 @@ This study delves into a novel Convolutional Neural Network (CNN) architecture f
 This comprehensive investigation contributes a new CNN architecture for brain tumor classification, navigating the challenges posed by imbalanced databases and emphasizing resource-efficient solutions. The results, presented through confusion matrices and accuracy metrics, are compared with state-of-the-art methods, providing valuable insights into the effectiveness of the proposed CNN architecture in brain tumor classification.
 
 
-3.1. Dataset and Preprocessing
+# 3.1. Dataset and Preprocessing
 The research utilized a publicly available CE-MRI dataset collected from Nanfang Hospital Guangzhou China and General Hospital Tianjin Medical University in China. The dataset comprises 3062 MRI images from 233 patients with three types of BTs: gliomas (1426), meningiomas (708), and pituitary tumors (930).The image dataset utilized in this study comprises a collection from 233 distinct patients, capturing images across three planes: sagittal (1025 images), axial (994 images), and coronal (1045 images). This multidimensional dataset ensures a comprehensive representation of brain tumor images, providing valuable insights into tumor characteristics and enabling a robust evaluation of the proposed Convolutional Neural Network (CNN) architecture's performance. The images, in 2D volumes with a resolution of 512 × 512 and a pixel size of 0.49 × 0.49 mm², were manually annotated by experienced radiologists. The dataset was preprocessed by normalizing the MRI images, converting them to .jpg format, and resizing to 224 × 224 pixels. 
 fig 1.
 
-3.2. Image pre processing and data augmentation
+# 3.2. Image pre processing and data augmentation
 The magnetic resonance images sourced from the database exhibited variations in sizes and were originally formatted in int16. As these images serve as the input layer for the network, a crucial pre-processing step involved normalizing and resizing them to a uniform dimension of 256 × 256 pixels.
 
 To further enrich the dataset, two distinct transformations were applied to each image. Firstly, an augmentation involved rotating the images by 90 degrees. Secondly, a vertical flipping transformation was applied [23]. Through these augmentation techniques, the dataset was effectively expanded threefold, culminating in a total of 9192 images. This augmentation process enhances the diversity of the dataset, contributing to a more robust and effective training of the neural network.
 
 Figure 2. Architecture of proposed hybrid model.
 
- 3.3.Training Network
+# 3.3.Training Network
 The training of the network utilized a k-fold cross-validation method, employing two distinct approaches, each involving a 10-fold cross-validation. The first approach, termed record-wise cross-validation, randomly partitioned the data into 10 roughly equal subsets, ensuring an equal representation of each tumor category in each subset. The second approach, subject-wise cross-validation, randomly divided the data into 10 portions, with each set exclusively containing data from a couple of subjects, regardless of the tumor class. This approach aimed to evaluate the network's generalization capability in medical diagnostics, assessing its effectiveness in predicting diagnoses based on data from subjects not observed during training.
 
 To compare the network's performance with other state-of-the-art methods, a test without k-fold cross-validation (one test) was also conducted. In all the mentioned methods, two data portions were allocated for testing, two for validation, and six for training. Both the normal and augmented datasets underwent testing using all the methods.
 
 The network's training employed an Adam optimizer with a mini-batch size of 16, incorporating data shuffling in each iteration. The early-stop condition, determining when the training process concludes, was set to one epoch, stopping when the loss began to increase. A regularization factor of 0.004 and an initial learning rate of 0.0004 were specified. The weights of the convolutional layers were initialized using the Glorot initializer, also known as the Xavier initializer [23]. I stopped training stopped when the loss on validation set got larger than or was equal to the previous lowest loss over 11 times. This training was done on a system with a single CUDA GPU- Geforce RTX 2060.
 
-4. Results:
+# 4. Results:
 The results of the developed CNN are presented in Table 2, and visual representations are provided through confusion matrices in Figures 3 and 5–7. In the confusion matrices, non-white rows depict network output classes, while non-white columns correspond to real classes in Figures 3 and 5–7. The diagonal entries display the numbers/percentages of correctly classified images. The last row indicates sensitivity, while the last column corresponds to specificity. The overall accuracy is presented in the bottom-right field. The upper number in the non-white boxes indicates the number of images, and the lower number represents the percentage of the entire class database in the training or test set. To address class imbalance in the database, mean average precision, recall, and F1-score are also provided:
 
 Results from testing the network with 10-fold cross-validation 
